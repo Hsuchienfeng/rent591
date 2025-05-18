@@ -1,0 +1,16 @@
+rent591/
+├── .gitignore
+├── README.md
+├── app/
+│   ├── build.gradle
+│   └── src/
+│       └── main/
+│           ├── AndroidManifest.xml
+│           ├── java/com/example/rent591/
+│           │   ├── MainActivity.kt
+│           │   ├── model/RentModels.kt
+│           │   ├── network/RentApiService.kt
+│           │   ├── viewmodel/RentViewModel.kt
+│           │   └── ui/RentAnalysisScreen.kt
+├── build.gradle
+└── settings.gradle
