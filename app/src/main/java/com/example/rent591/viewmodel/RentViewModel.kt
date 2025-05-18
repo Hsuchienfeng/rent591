@@ -3,12 +3,11 @@ package com.example.rent591.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rent591.model.RentItem
-import com.example.rent591.network.RentApiService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class RentViewModel(private val api: RentApiService) : ViewModel() {
+class RentViewModel : ViewModel() {
 
     private val _rentItems = MutableStateFlow<List<RentItem>>(emptyList())
     val rentItems: StateFlow<List<RentItem>> = _rentItems
@@ -19,7 +18,14 @@ class RentViewModel(private val api: RentApiService) : ViewModel() {
     fun fetchRentData() {
         viewModelScope.launch {
             try {
-                val data = api.getRentList()
+                // 假資料模擬租屋清單
+                val data = listOf(
+                    RentItem("新北市中和區中正路100號", 18000),
+                    RentItem("新北市中和區中正路200號", 20000),
+                    RentItem("新北市中和區連城路150號", 22000),
+                    RentItem("新北市中和區連城路300號", 25000),
+                    RentItem("新北市中和區景平路99號", 17000)
+                )
                 _rentItems.value = data
                 _streetAvgPrices.value = analyzeRentByStreet(data)
             } catch (e: Exception) {
@@ -45,3 +51,4 @@ class RentViewModel(private val api: RentApiService) : ViewModel() {
         return regex.find(address)?.value
     }
 }
+
